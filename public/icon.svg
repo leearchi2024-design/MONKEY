@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+      <stop offset="0" stop-color="#f6c46e"/>
+      <stop offset=".6" stop-color="#e8954a"/>
+      <stop offset="1" stop-color="#b8603a"/>
+    </radialGradient>
+    <radialGradient id="glass" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#bfe3ef" stop-opacity=".08"/>
+    </radialGradient>
+    <filter id="crayon" filterUnits="userSpaceOnUse" x="0" y="0" width="512" height="512" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="7" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="9" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="gray"/>
+      <feComponentTransfer in="gray" result="tex">
+        <feFuncR type="linear" slope="0.5" intercept="0.62"/>
+        <feFuncG type="linear" slope="0.5" intercept="0.62"/>
+        <feFuncB type="linear" slope="0.5" intercept="0.62"/>
+        <feFuncA type="linear" slope="0" intercept="1"/>
+      </feComponentTransfer>
+      <feBlend in="rough" in2="tex" mode="multiply" result="waxy"/>
+      <feComposite in="waxy" in2="rough" operator="in"/>
+    </filter>
+  </defs>
+
+  <!-- 背景：燈籠色暖光＋紙張顆粒 -->
+  <rect width="512" height="512" fill="url(#bg)" filter="url(#crayon)"/>
+  <g opacity=".35" fill="#fff3d6" filter="url(#crayon)">
+    <circle cx="70" cy="80" r="10"/><circle cx="450" cy="110" r="7"/><circle cx="90" cy="440" r="6"/><circle cx="440" cy="400" r="9"/>
+  </g>
+
+  <g filter="url(#crayon)" stroke="#2b2220" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <!-- 耳朵 -->
+    <circle cx="112" cy="282" r="58" fill="#9a5a32"/>
+    <circle cx="112" cy="282" r="30" fill="#f2c79a" stroke-width="7"/>
+    <circle cx="400" cy="282" r="58" fill="#9a5a32"/>
+    <circle cx="400" cy="282" r="30" fill="#f2c79a" stroke-width="7"/>
+    <!-- 頭 -->
+    <circle cx="256" cy="290" r="156" fill="#a8643a"/>
+    <!-- 臉 -->
+    <path d="M148 300 Q146 196 214 206 Q256 232 298 206 Q366 196 364 300 Q364 418 256 418 Q148 418 148 300 Z" fill="#f6d3a8"/>
+    <!-- 偵探帽 -->
+    <path d="M96 196 Q112 92 256 84 Q400 92 416 196 Q256 160 96 196 Z" fill="#6b4a3a"/>
+    <path d="M70 206 Q256 150 442 206 Q452 226 430 228 Q256 184 82 228 Q60 226 70 206 Z" fill="#4a3228"/>
+    <path d="M118 176 Q256 136 394 176 L392 196 Q256 160 120 196 Z" fill="#d9a23c" stroke-width="7"/>
+  </g>
+
+  <!-- 五官（不加抖動，保持清楚） -->
+  <g stroke="#2b2220" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 左眼 -->
+    <ellipse cx="200" cy="292" rx="26" ry="30" fill="#fffaf2" stroke-width="7"/>
+    <circle cx="204" cy="298" r="17" fill="#4a3226" stroke="none"/>
+    <circle cx="204" cy="298" r="8" fill="#1a1210" stroke="none"/>
+    <circle cx="211" cy="290" r="5.5" fill="#fff" stroke="none"/>
+    <path d="M168 266 Q198 246 230 262" fill="none" stroke-width="9"/>
+    <!-- 右眼（在放大鏡後面，看起來更大） -->
+    <ellipse cx="318" cy="290" rx="36" ry="40" fill="#fffaf2" stroke-width="7"/>
+    <circle cx="322" cy="298" r="24" fill="#4a3226" stroke="none"/>
+    <circle cx="322" cy="298" r="11" fill="#1a1210" stroke="none"/>
+    <circle cx="332" cy="286" r="8" fill="#fff" stroke="none"/>
+    <!-- 鼻子嘴巴 -->
+    <ellipse cx="244" cy="352" rx="5" ry="4" fill="#2b2220" stroke="none"/>
+    <ellipse cx="268" cy="352" rx="5" ry="4" fill="#2b2220" stroke="none"/>
+    <path d="M226 374 Q256 398 288 372" fill="none" stroke-width="8"/>
+    <!-- 腮紅 -->
+    <ellipse cx="176" cy="350" rx="20" ry="11" fill="#e9806e" opacity=".5" stroke="none"/>
+  </g>
+
+  <!-- 放大鏡 -->
+  <g filter="url(#crayon)" stroke="#2b2220" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M370 352 L446 436" stroke-width="40"/>
+    <path d="M370 352 L446 436" stroke="#8a5a3a" stroke-width="24"/>
+    <circle cx="318" cy="292" r="72" fill="url(#glass)" stroke-width="22"/>
+    <circle cx="318" cy="292" r="72" fill="none" stroke="#d9a23c" stroke-width="10"/>
+  </g>
+  <path d="M272 262 Q284 238 310 232" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+</svg>
