@@ -1,5 +1,5 @@
 # 每次推到 main，就自動打包遊戲並發布到 GitHub Pages
-# 網址：https://leearchi2024-design.github.io/monkey/
+# 網址：https://leearchi2024-design.github.io/MONKEY/
 name: 發布到 GitHub Pages
 
 on:
