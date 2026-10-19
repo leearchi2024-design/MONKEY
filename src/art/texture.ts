@@ -31,12 +31,12 @@ const DEFS = `<svg width="0" height="0" style="position:absolute" aria-hidden="t
   ${crayonFilter('crayon', 5, 0.75, 0.72)}
   ${crayonFilter('crayon-soft', 2.6, 0.9, 0.8)}
   <radialGradient id="warmVignette" cx="50%" cy="46%" r="75%">
-    <stop offset=".45" stop-color="#fff3d6" stop-opacity="0"/>
-    <stop offset="1" stop-color="#5a2a1a" stop-opacity=".55"/>
+    <stop offset=".45" stop-color="#ece3d0" stop-opacity="0"/>
+    <stop offset="1" stop-color="#533a32" stop-opacity=".55"/>
   </radialGradient>
   <radialGradient id="warmLight" cx="50%" cy="38%" r="55%">
-    <stop offset="0" stop-color="#ffd890" stop-opacity=".35"/>
-    <stop offset="1" stop-color="#ffd890" stop-opacity="0"/>
+    <stop offset="0" stop-color="#dac7a4" stop-opacity=".35"/>
+    <stop offset="1" stop-color="#dac7a4" stop-opacity="0"/>
   </radialGradient>
 </defs></svg>`;
 
@@ -58,7 +58,7 @@ function grainTile(size: number, alpha: number, dark: boolean): string {
   g.putImageData(img, 0, 0);
   // 再刷幾道斜向的蠟筆筆觸
   g.globalAlpha = 0.05;
-  g.strokeStyle = dark ? '#3a2010' : '#fff8e8';
+  g.strokeStyle = dark ? '#3c2d24' : '#f0eadb';
   g.lineWidth = 1.2;
   for (let k = 0; k < 90; k++) {
     const x = Math.random() * size;

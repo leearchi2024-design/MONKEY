@@ -5,9 +5,9 @@ import { html, ITEM_ICON, sfx, shuffle, sleep, toast, vibrate } from '../../ui';
 import type { PhaseResult, Run, StageChrome } from '../play';
 
 const GROUPS = [
-  { key: 'time', label: '時間', color: '#ff9d3a', ico: '⏰' },
-  { key: 'place', label: '地點', color: '#2bb3b1', ico: '📍' },
-  { key: 'who', label: '對象', color: '#ff6f91', ico: '👤' },
+  { key: 'time', label: '時間', color: '#c4996e', ico: '⏰' },
+  { key: 'place', label: '地點', color: '#52908f', ico: '📍' },
+  { key: 'who', label: '對象', color: '#d18f9f', ico: '👤' },
 ] as const;
 
 /** 階段 2：推理（把證物拼成時間／地點／對象） */

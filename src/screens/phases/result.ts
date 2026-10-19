@@ -74,7 +74,7 @@ export function showResult(run: Run, ok: boolean, fail?: FailKind): void {
             <h3 style="margin:0">第 ${lv.id} 關・${lv.title}</h3>
             <p class="result-text">${lv.win}</p>
             <div class="stat-row"><span>證據值 ${Math.max(0, run.evidence)}%</span><span>隱藏證物 ${run.hidden.filter((h) => h.found).length}/2</span>${run.saves ? `<span>變裝帽 ×${run.saves}</span>` : ''}</div>
-            <div class="reward">${coinSvg().replace('fill="#fff"', 'fill="#ff9d3a"')} +${coins}${first ? '' : '（重玩）'}</div>
+            <div class="reward">${coinSvg().replace('fill="#fff"', 'fill="#c4996e"')} +${coins}${first ? '' : '（重玩）'}</div>
             ${stars < 3 ? `<p class="tiny" style="margin-top:8px">三星條件：證據值 100% 且找到 2 件隱藏證物</p>` : ''}
             ${lv.ending ? `<div class="ending"><b>${lv.id === 20 ? '— 全劇終 —' : '— 本章完 —'}</b>${lv.ending}</div>` : ''}
             <div class="modal-actions">

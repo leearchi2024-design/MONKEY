@@ -22,7 +22,7 @@ export function runConfront(run: Run, stage: HTMLElement, ui: StageChrome): Prom
 
     html(
       stage,
-      `${sceneSvg(lv.scene, '<rect width="400" height="720" fill="#1a1020" opacity=".45"/>')}
+      `${sceneSvg(lv.scene, '<rect width="400" height="720" fill="#261f2a" opacity=".45"/>')}
       <div class="confront-opp" data-opp>${portrait(lv.target, { size: 190, expr: 'smug' })}</div>
       <div class="round-pips" data-pips>${[1, 2, 3].map((n) => `<i>${n}</i>`).join('')}</div>
       <div class="speech" data-speech><span class="who">${opp.name}</span><span data-line></span></div>

@@ -21,10 +21,10 @@ const nodeY = (i: number) => H - PAD_BOTTOM - (i - 1) * GAP - Math.floor((i - 1)
 const nodeX = (i: number) => 50 + Math.sin((i - 1) * 0.95) * 24; // 百分比
 
 const ZONES = [
-  { bg: '#d97a98', road: '#fbe9ee', edge: '#c06683', bld: ['#a8577a', '#8e4466', '#c4708f'], tree: ['#e39ab3', '#b8608a', '#f2c1d1'] },
-  { bg: '#e8955c', road: '#fff0dc', edge: '#c97843', bld: ['#b8623a', '#9a4f2e', '#d98050'], tree: ['#7fbf6a', '#5fa05a', '#a7d88a'] },
-  { bg: '#4fa3a8', road: '#e9f7f5', edge: '#3b8589', bld: ['#2f6f7a', '#3b8589', '#5d9ea6'], tree: ['#8fd3a8', '#5fb08a', '#c3ead2'] },
-  { bg: '#6b5aa8', road: '#efe9fb', edge: '#57488c', bld: ['#4a3d7a', '#3a2f63', '#7f6cbd'], tree: ['#c78bff', '#a46be0', '#e3c6ff'] },
+  { bg: '#bb8e9c', road: '#eddce1', edge: '#a57c89', bld: ['#926d7d', '#7d5b6a', '#aa8392'], tree: ['#c9a5b1', '#9f768a', '#ddc0ca'] },
+  { bg: '#bf987d', road: '#ede2d3', edge: '#a47f67', bld: ['#966f5d', '#805e4e', '#b28972'], tree: ['#88a67e', '#708d6e', '#a6be98'] },
+  { bg: '#688e90', road: '#dde8e7', edge: '#537678', bld: ['#48666c', '#537678', '#718e92'], tree: ['#9bbca7', '#749988', '#c1d7ca'] },
+  { bg: '#776f92', road: '#e1dced', edge: '#645d7c', bld: ['#58516e', '#48435c', '#887fa5'], tree: ['#bea1d9', '#a085bd', '#d7c6e8'] },
 ];
 
 /** 偽隨機，讓地圖每次長一樣 */
@@ -58,10 +58,10 @@ function worldSvg(): string {
         for (let wy = y + 22; wy < y + hgt - 24; wy += 30) {
           for (let wx = x + 12; wx < x + w - 18; wx += 24) {
             const lit = r() > 0.45;
-            parts.push(`<rect x="${wx}" y="${wy}" width="12" height="16" rx="2" fill="${lit ? '#ffe7a8' : '#000'}" opacity="${lit ? 0.85 : 0.15}"/>`);
+            parts.push(`<rect x="${wx}" y="${wy}" width="12" height="16" rx="2" fill="${lit ? '#e0d4b3' : '#000'}" opacity="${lit ? 0.85 : 0.15}"/>`);
           }
         }
-        if (r() > 0.5) parts.push(`<path d="M${x + 8} ${y + hgt - 30} h${w - 16} l-6 14 h${-(w - 28)} Z" fill="${['#ff6f91', '#ffcf3a', '#7fd3ff'][Math.floor(r() * 3)]}" opacity=".9"/>`);
+        if (r() > 0.5) parts.push(`<path d="M${x + 8} ${y + hgt - 30} h${w - 16} l-6 14 h${-(w - 28)} Z" fill="${['#d18f9f', '#c4af6e', '#99c1d5'][Math.floor(r() * 3)]}" opacity=".9"/>`);
       }
     }
     // 樹
@@ -69,15 +69,15 @@ function worldSvg(): string {
       const y = top + 40 + r() * (bottom - top - 80);
       const x = r() > 0.5 ? 70 + r() * 50 : 280 + r() * 50;
       const tc = z.tree[Math.floor(r() * 3)];
-      parts.push(`<rect x="${x - 3}" y="${y}" width="6" height="26" fill="#6b4a3a" opacity=".8"/><ellipse cx="${x}" cy="${y - 4}" rx="${16 + r() * 8}" ry="${22 + r() * 8}" fill="${tc}"/>`);
+      parts.push(`<rect x="${x - 3}" y="${y}" width="6" height="26" fill="#64544c" opacity=".8"/><ellipse cx="${x}" cy="${y - 4}" rx="${16 + r() * 8}" ry="${22 + r() * 8}" fill="${tc}"/>`);
     }
     // 燈籠串
     if (c === 2 || c === 4) {
       for (let y = top + 120; y < bottom - 80; y += 340) {
-        parts.push(`<path d="M0 ${y} Q200 ${y + 50} 400 ${y}" fill="none" stroke="#3a2a2a" stroke-width="2" opacity=".5"/>`);
+        parts.push(`<path d="M0 ${y} Q200 ${y + 50} 400 ${y}" fill="none" stroke="#403737" stroke-width="2" opacity=".5"/>`);
         for (let x = 40; x < 400; x += 64) {
           const yy = y + 50 * (1 - Math.pow((x - 200) / 200, 2)) * 0.5 + 6;
-          parts.push(`<circle cx="${x}" cy="${yy + 8}" r="16" fill="#ffcf73" opacity=".35"/><ellipse cx="${x}" cy="${yy + 8}" rx="8" ry="10" fill="${c === 2 ? '#ff8a4a' : '#ff6fb0'}"/>`);
+          parts.push(`<circle cx="${x}" cy="${yy + 8}" r="16" fill="#d2bc92" opacity=".35"/><ellipse cx="${x}" cy="${yy + 8}" rx="8" ry="10" fill="${c === 2 ? '#c89478' : '#d18fad'}"/>`);
         }
       }
     }
@@ -142,10 +142,10 @@ export const mapScreen: Screen = (root) => {
       </div>
     </div>
     ${hudMarkup()}
-    <button class="map-route-tag" data-home><span class="mini" style="background:${route === 'f' ? '#ffe0e8' : '#deeefc'}">${portrait(hero, { size: 40 })}</span>${route === 'f' ? '女生線' : '男生線'}・${Object.values(save.stars[route]).filter((s) => s > 0).length}/20</button>
+    <button class="map-route-tag" data-home><span class="mini" style="background:${route === 'f' ? '#eed6dc' : '#d4e1ec'}">${portrait(hero, { size: 40 })}</span>${route === 'f' ? '女生線' : '男生線'}・${Object.values(save.stars[route]).filter((s) => s > 0).length}/20</button>
     <div class="map-dock">
       <button class="dock-btn" data-shop2>${ITEM_ICON.magnifier}道具店</button>
-      <button class="dock-btn" data-settings><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="8" fill="none" stroke="#3a2a2a" stroke-width="4"/><path d="M24 4 v8 M24 36 v8 M4 24 h8 M36 24 h8 M10 10 l6 6 M32 32 l6 6 M38 10 l-6 6 M16 32 l-6 6" stroke="#3a2a2a" stroke-width="4" stroke-linecap="round"/></svg>設定</button>
+      <button class="dock-btn" data-settings><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="8" fill="none" stroke="#403737" stroke-width="4"/><path d="M24 4 v8 M24 36 v8 M4 24 h8 M36 24 h8 M10 10 l6 6 M32 32 l6 6 M38 10 l-6 6 M16 32 l-6 6" stroke="#403737" stroke-width="4" stroke-linecap="round"/></svg>設定</button>
     </div>`,
   );
 

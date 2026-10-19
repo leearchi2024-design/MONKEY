@@ -7,7 +7,7 @@ import { CRAYON_SOFT } from './texture';
  * 風格參考插畫設定稿：深色手繪描線、有眼白與虹膜的大眼、層次服裝、招牌配件、大地色系。
  */
 
-const LINE = '#2b2220';
+const LINE = '#352e2c';
 const LW = 2.2;
 
 function shade(hex: string, amt: number): string {
@@ -49,7 +49,7 @@ function body(l: Look, a: Set<Acc>): string {
   const o = outfitOf(l, a);
   const top = l.top;
   const dark = shade(top, -30);
-  const inner = l.inner ?? (o === 'suit' ? '#f4efe6' : '#efe3cf');
+  const inner = l.inner ?? (o === 'suit' ? '#e7e2d9' : '#e1d7c7');
   const neck = ol('<path d="M51 92 L51 108 Q60 113 69 108 L69 92 Z"/>', shade(l.skin, -14), 1.6);
   let s = '';
 
@@ -62,13 +62,13 @@ function body(l: Look, a: Set<Acc>): string {
       s += neck + ol(TORSO, top);
       s += ol('<path d="M44 108 Q60 122 76 108 Q60 116 44 108 Z"/>', dark, 1.6);
       s += line('M54 116 L52.5 131') + line('M66 116 L67.5 131');
-      s += `<circle cx="52.5" cy="132" r="1.8" fill="#efe3cf" stroke="${LINE}" stroke-width="1.2"/><circle cx="67.5" cy="132" r="1.8" fill="#efe3cf" stroke="${LINE}" stroke-width="1.2"/>`;
+      s += `<circle cx="52.5" cy="132" r="1.8" fill="#e1d7c7" stroke="${LINE}" stroke-width="1.2"/><circle cx="67.5" cy="132" r="1.8" fill="#e1d7c7" stroke="${LINE}" stroke-width="1.2"/>`;
       break;
     case 'zip':
       s += neck + ol(TORSO, top);
       s += ol('<path d="M47 103 L48 114 L60 118 L72 114 L73 103 L60 107 Z"/>', dark, 1.6);
-      s += line('M60 118 L60 142', 2) + line('M30 116 L24 140', 3, '#f4efe6') + line('M90 116 L96 140', 3, '#f4efe6');
-      s += `<rect x="58" y="120" width="4" height="6" rx="1" fill="#d9c9a8" stroke="${LINE}" stroke-width="1"/>`;
+      s += line('M60 118 L60 142', 2) + line('M30 116 L24 140', 3, '#e7e2d9') + line('M90 116 L96 140', 3, '#e7e2d9');
+      s += `<rect x="58" y="120" width="4" height="6" rx="1" fill="#c9bea8" stroke="${LINE}" stroke-width="1"/>`;
       break;
     case 'turtleneck':
       s += ol(TORSO, top) + ol('<path d="M49 96 L49 110 Q60 115 71 110 L71 96 Q60 100 49 96 Z"/>', shade(top, 10), 1.8);
@@ -112,26 +112,26 @@ function body(l: Look, a: Set<Acc>): string {
       s += neck + ol(TORSO, inner);
       s += line('M48 106 Q60 114 72 106', 1.6);
       s += ol('<path d="M30 142 L32 118 Q40 110 50 105 L57 142 Z"/><path d="M90 142 L88 118 Q80 110 70 105 L63 142 Z"/>', top);
-      s += line('M33 128 L56 128', 3, '#e8e2d2') + line('M64 128 L87 128', 3, '#e8e2d2');
+      s += line('M33 128 L56 128', 3, '#dbd6c9') + line('M64 128 L87 128', 3, '#dbd6c9');
       break;
     default: // tee
       s += neck + ol(TORSO, top);
       s += ol('<path d="M46 106 Q60 118 74 106 Q60 112 46 106 Z"/>', dark, 1.4);
   }
   if (a.has('tie') || o === 'suit') {
-    s += ol('<path d="M57 108 L63 108 L61.5 112 L64 130 L60 135 L56 130 L58.5 112 Z"/>', l.accColor && a.has('tie') ? l.accColor : '#a8423a', 1.2);
+    s += ol('<path d="M57 108 L63 108 L61.5 112 L64 130 L60 135 L56 130 L58.5 112 Z"/>', l.accColor && a.has('tie') ? l.accColor : '#945651', 1.2);
   }
-  if (a.has('pearls')) s += [43, 49, 55, 60, 65, 71, 77].map((x, i) => `<circle cx="${x}" cy="${108 + (3 - Math.abs(3 - i)) * 1.6}" r="2.5" fill="#fffaf0" stroke="${LINE}" stroke-width=".9"/>`).join('');
-  if (a.has('chain')) s += line('M47 106 Q60 119 73 106', 1.8, '#d4a63a');
+  if (a.has('pearls')) s += [43, 49, 55, 60, 65, 71, 77].map((x, i) => `<circle cx="${x}" cy="${108 + (3 - Math.abs(3 - i)) * 1.6}" r="2.5" fill="#f2ece0" stroke="${LINE}" stroke-width=".9"/>`).join('');
+  if (a.has('chain')) s += line('M47 106 Q60 119 73 106', 1.8, '#b59958');
   if (a.has('scarf')) {
-    const c = l.accColor ?? '#b5583a';
+    const c = l.accColor ?? '#9e6553';
     s += ol('<path d="M38 104 Q60 116 82 104 L84 112 Q60 124 36 112 Z"/><path d="M66 114 L74 114 L76 134 L66 132 Z"/>', c, 1.6);
     s += line('M68 132 L68 137 M71 133 L71 138 M74 133 L74 137', 1.2);
   }
   if (a.has('headphones')) {
     // 掛在脖子上的耳機
-    s += line('M40 106 Q60 124 80 106', 3.2, '#3a3a40');
-    s += ol('<ellipse cx="38" cy="108" rx="6" ry="7"/><ellipse cx="82" cy="108" rx="6" ry="7"/>', '#d9a23c', 1.6);
+    s += line('M40 106 Q60 124 80 106', 3.2, '#434347');
+    s += ol('<ellipse cx="38" cy="108" rx="6" ry="7"/><ellipse cx="82" cy="108" rx="6" ry="7"/>', '#b9975a', 1.6);
   }
   return s;
 }
@@ -181,7 +181,7 @@ function hairFront(l: Look): string {
     case 'bun':
       return ol('<circle cx="60" cy="13" r="14"/><path d="M18 64 Q16 22 60 21 Q104 22 102 64 Q94 42 60 38 Q26 42 18 64 Z"/>', c) + line('M50 13 Q60 6 70 13', 1.6, shade(c, 50)) + hi;
     case 'ponytail':
-      return ol('<path d="M18 64 Q15 20 60 19 Q105 20 102 64 Q92 40 72 38 Q50 44 32 44 Q22 50 18 64 Z"/>', c) + ol('<circle cx="94" cy="35" r="5.5"/>', '#d9a23c', 1.4) + hi;
+      return ol('<path d="M18 64 Q15 20 60 19 Q105 20 102 64 Q92 40 72 38 Q50 44 32 44 Q22 50 18 64 Z"/>', c) + ol('<circle cx="94" cy="35" r="5.5"/>', '#b9975a', 1.4) + hi;
     case 'perm':
       return ol([[28, 40], [42, 30], [58, 26], [74, 30], [88, 40]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="13"/>`).join(''), c);
   }
@@ -194,10 +194,10 @@ function eyeOpen(cx: number, l: Look, o: { iris?: number; look?: number; white?:
   const iris = o.iris ?? 5.4;
   const dy = o.look ?? 1;
   const wy = o.white ?? 8.4;
-  const eye = l.eye ?? '#4a3226';
-  return `<ellipse cx="${cx}" cy="${ey}" rx="7.4" ry="${wy}" fill="#fffaf2"/>
+  const eye = l.eye ?? '#4d3c34';
+  return `<ellipse cx="${cx}" cy="${ey}" rx="7.4" ry="${wy}" fill="#f3ece1"/>
     <circle cx="${cx + 0.4}" cy="${ey + dy}" r="${iris}" fill="${eye}"/>
-    <circle cx="${cx + 0.4}" cy="${ey + dy}" r="${iris * 0.48}" fill="#1a1210"/>
+    <circle cx="${cx + 0.4}" cy="${ey + dy}" r="${iris * 0.48}" fill="#271f1d"/>
     <circle cx="${cx + 2}" cy="${ey + dy - 1.8}" r="1.5" fill="#fff"/>`;
 }
 
@@ -211,7 +211,7 @@ function face(l: Look, e: Expr, a: Set<Acc>): string {
   const L = 45;
   const R = 75;
   const f = l.gender === 'f';
-  const browC = shade(l.hairColor === '#8b8b8b' ? '#6b6560' : l.hairColor, -10);
+  const browC = shade(l.hairColor === '#8a8a8a' ? '#6c6865' : l.hairColor, -10);
   const brow = (d: string) => line(d, 3.2, browC);
   let eyes = '';
   let brows = '';
@@ -222,13 +222,13 @@ function face(l: Look, e: Expr, a: Set<Acc>): string {
     case 'happy':
       eyes = line(`M${L - 6} 70 Q${L} 62 ${L + 6} 70`, 3) + line(`M${R - 6} 70 Q${R} 62 ${R + 6} 70`, 3);
       brows = brow(`M${L - 7} 56 Q${L} 51 ${L + 7} 55`) + brow(`M${R - 7} 55 Q${R} 51 ${R + 7} 56`);
-      mouth = ol('<path d="M52 84 Q60 97 68 84 Z"/>', '#8c3a3a', 1.2) + '<path d="M55 90 Q60 94 65 90 Q60 88 55 90Z" fill="#e8807a"/>';
+      mouth = ol('<path d="M52 84 Q60 97 68 84 Z"/>', '#804d4d', 1.2) + '<path d="M55 90 Q60 94 65 90 Q60 88 55 90Z" fill="#ce8c88"/>';
       break;
     case 'shocked':
       eyes = eyeOpen(L, l, { iris: 2.8, look: 0, white: 8.6 }) + eyeOpen(R, l, { iris: 2.8, look: 0, white: 8.6 }) + line(`M${L - 7} 63 Q${L} 57 ${L + 7} 63`, 2.4) + line(`M${R - 7} 63 Q${R} 57 ${R + 7} 63`, 2.4);
       brows = brow(`M${L - 7} 52 Q${L} 46 ${L + 7} 50`) + brow(`M${R - 7} 50 Q${R} 46 ${R + 7} 52`);
-      mouth = ol('<ellipse cx="60" cy="89" rx="5" ry="6.5"/>', '#7a2e34', 1.2);
-      extra.push(ol('<path d="M100 42 Q106 52 101 57 Q96 52 100 42Z"/>', '#9fd3f2', 1));
+      mouth = ol('<ellipse cx="60" cy="89" rx="5" ry="6.5"/>', '#714145', 1.2);
+      extra.push(ol('<path d="M100 42 Q106 52 101 57 Q96 52 100 42Z"/>', '#a5c6da', 1));
       break;
     case 'smug':
       eyes = eyeOpen(L, l, { look: 2 }) + eyeOpen(R, l, { look: 2 });
@@ -242,14 +242,14 @@ function face(l: Look, e: Expr, a: Set<Acc>): string {
       eyes += `<path d="M${L - 8} 56 L${L + 8} 56 L${L + 8} 66 L${L - 8} 61 Z" fill="${l.skin}"/><path d="M${R - 8} 56 L${R + 8} 56 L${R + 8} 61 L${R - 8} 66 Z" fill="${l.skin}"/>`;
       eyes += line(`M${L - 7.5} 61.5 L${L + 7.5} 66`, 2.8) + line(`M${R - 7.5} 66 L${R + 7.5} 61.5`, 2.8);
       brows = brow(`M${L - 8} 54 L${L + 7} 61`) + brow(`M${R - 7} 61 L${R + 8} 54`);
-      mouth = ol('<path d="M52 91 Q60 83 68 91 Z"/>', '#f4efe6', 1.2);
-      extra.push(line('M94 36 l7 7 M101 36 l-7 7', 2.6, '#c8433a'));
+      mouth = ol('<path d="M52 91 Q60 83 68 91 Z"/>', '#e7e2d9', 1.2);
+      extra.push(line('M94 36 l7 7 M101 36 l-7 7', 2.6, '#ab5c56'));
       break;
     case 'cry':
       eyes = line(`M${L - 6} 67 Q${L} 73 ${L + 6} 67`, 3) + line(`M${R - 6} 67 Q${R} 73 ${R + 6} 67`, 3);
       brows = brow(`M${L - 7} 58 Q${L} 52 ${L + 7} 55`) + brow(`M${R - 7} 55 Q${R} 52 ${R + 7} 58`);
-      mouth = ol('<path d="M53 91 Q60 84 67 91 Q60 89 53 91 Z"/>', '#8c3a3a', 1.2);
-      extra.push(ol(`<path d="M${L - 2} 71 Q${L - 6} 84 ${L - 2} 96 Q${L + 2} 84 ${L} 71Z"/><path d="M${R + 2} 71 Q${R + 6} 84 ${R + 2} 96 Q${R - 2} 84 ${R} 71Z"/>`, '#9fd3f2', 1));
+      mouth = ol('<path d="M53 91 Q60 84 67 91 Q60 89 53 91 Z"/>', '#804d4d', 1.2);
+      extra.push(ol(`<path d="M${L - 2} 71 Q${L - 6} 84 ${L - 2} 96 Q${L + 2} 84 ${L} 71Z"/><path d="M${R + 2} 71 Q${R + 6} 84 ${R + 2} 96 Q${R - 2} 84 ${R} 71Z"/>`, '#a5c6da', 1));
       break;
     case 'worried':
       eyes = eyeOpen(L, l, { look: -1.4 }) + eyeOpen(R, l, { look: -1.4 }) + lid(L, f, -1) + lid(R, f, 1);
@@ -261,14 +261,14 @@ function face(l: Look, e: Expr, a: Set<Acc>): string {
       brows = brow(`M${L - 7} 56 Q${L} 52.5 ${L + 7} 55`) + brow(`M${R - 7} 55 Q${R} 52.5 ${R + 7} 56`);
       mouth = line('M55 87 Q60 90.5 65 87', 2.4);
   }
-  if (a.has('lips') && (e === 'normal' || e === 'smug' || e === 'worried')) mouth = ol('<path d="M54 87 Q57 84.5 60 86 Q63 84.5 66 87 Q60 92 54 87 Z"/>', '#b8323e', 1);
+  if (a.has('lips') && (e === 'normal' || e === 'smug' || e === 'worried')) mouth = ol('<path d="M54 87 Q57 84.5 60 86 Q63 84.5 66 87 Q60 92 54 87 Z"/>', '#9f4e55', 1);
   const nose = line('M59.5 76 Q62 79.5 58.5 81', 1.6, shade(l.skin, -60));
-  const blush = `<ellipse cx="34" cy="81" rx="6.5" ry="3.6" fill="#e9806e" opacity=".42"/><ellipse cx="86" cy="81" rx="6.5" ry="3.6" fill="#e9806e" opacity=".42"/>`;
+  const blush = `<ellipse cx="34" cy="81" rx="6.5" ry="3.6" fill="#cc8c81" opacity=".42"/><ellipse cx="86" cy="81" rx="6.5" ry="3.6" fill="#cc8c81" opacity=".42"/>`;
   let marks = '';
   if (a.has('freckles')) marks += [[32, 78], [36, 80], [34, 75], [84, 78], [88, 80], [86, 75]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1" fill="${shade(l.skin, -70)}"/>`).join('');
   if (a.has('mole')) marks += `<circle cx="70" cy="86" r="1.3" fill="${LINE}"/>`;
   if (a.has('stubble')) marks += Array.from({ length: 16 }, (_, i) => `<circle cx="${42 + (i % 8) * 5 + (i > 7 ? 2.5 : 0)}" cy="${95 + (i > 7 ? 4 : 0) - Math.abs(i % 8 - 3.5) * 0.6}" r=".9" fill="${shade(l.skin, -80)}"/>`).join('');
-  if (a.has('bandage')) marks += ol('<rect x="78" y="74" width="14" height="6" rx="2" transform="rotate(-18 85 77)"/>', '#f1d3a8', 1);
+  if (a.has('bandage')) marks += ol('<rect x="78" y="74" width="14" height="6" rx="2" transform="rotate(-18 85 77)"/>', '#dcc8aa', 1);
   return blush + marks + eyes + brows + nose + mouth + extra.join('');
 }
 
@@ -279,23 +279,23 @@ function headwear(l: Look, a: Set<Acc>): string {
   const c = l.accColor;
   if (a.has('beard')) s += ol('<path d="M29 78 Q32 106 60 108 Q88 106 91 78 Q84 94 60 94 Q36 94 29 78 Z"/>', shade(l.hairColor, 10), 1.6) + ol('<path d="M50 87 Q60 83 70 87 Q60 90 50 87 Z"/>', shade(l.hairColor, 10), 1.2);
   if (a.has('glasses')) s += `<g fill="rgba(255,255,255,.18)" stroke="${LINE}" stroke-width="2.4"><circle cx="45" cy="68" r="10"/><circle cx="75" cy="68" r="10"/></g>` + line('M55 67 Q60 64 65 67', 2.2) + line('M35 66 L25 64', 2.2) + line('M85 66 L95 64', 2.2);
-  if (a.has('sunglasses')) s += ol('<rect x="31" y="60" width="26" height="15" rx="6"/><rect x="63" y="60" width="26" height="15" rx="6"/><rect x="56" y="63" width="8" height="3"/>', '#22201f', 1.4) + line('M36 64 L45 64', 2, 'rgba(255,255,255,.55)') + line('M68 64 L77 64', 2, 'rgba(255,255,255,.55)');
-  if (a.has('headband')) s += line('M21 50 Q60 22 99 50', 8, LINE) + line('M21 50 Q60 22 99 50', 5, c ?? '#d9707a');
-  if (a.has('clip')) s += ol('<rect x="78" y="38" width="16" height="6" rx="3" transform="rotate(-24 86 41)"/>', c ?? '#d9a23c', 1.2) + ol('<circle cx="80" cy="44" r="3"/>', '#f4efe6', 1);
-  if (a.has('bow')) s += `<g transform="translate(88 30) rotate(18)">${ol('<path d="M0 0 L-12 -9 L-12 9 Z"/><path d="M0 0 L12 -9 L12 9 Z"/>', c ?? '#c9505a', 1.4)}${ol('<circle r="4"/>', shade(c ?? '#c9505a', -25), 1.2)}</g>`;
+  if (a.has('sunglasses')) s += ol('<rect x="31" y="60" width="26" height="15" rx="6"/><rect x="63" y="60" width="26" height="15" rx="6"/><rect x="56" y="63" width="8" height="3"/>', '#2d2b2b', 1.4) + line('M36 64 L45 64', 2, 'rgba(255,255,255,.55)') + line('M68 64 L77 64', 2, 'rgba(255,255,255,.55)');
+  if (a.has('headband')) s += line('M21 50 Q60 22 99 50', 8, LINE) + line('M21 50 Q60 22 99 50', 5, c ?? '#c17f85');
+  if (a.has('clip')) s += ol('<rect x="78" y="38" width="16" height="6" rx="3" transform="rotate(-24 86 41)"/>', c ?? '#b9975a', 1.2) + ol('<circle cx="80" cy="44" r="3"/>', '#e7e2d9', 1);
+  if (a.has('bow')) s += `<g transform="translate(88 30) rotate(18)">${ol('<path d="M0 0 L-12 -9 L-12 9 Z"/><path d="M0 0 L12 -9 L12 9 Z"/>', c ?? '#b0666c', 1.4)}${ol('<circle r="4"/>', shade(c ?? '#b0666c', -25), 1.2)}</g>`;
   if (a.has('cap')) {
-    const cc = c ?? '#b5583a';
+    const cc = c ?? '#9e6553';
     s += ol('<path d="M18 48 Q20 14 60 13 Q100 14 102 48 Z"/>', cc) + ol('<path d="M14 48 L106 48 Q108 55 100 55 L20 55 Q12 55 14 48 Z"/>', shade(cc, -25), 1.8) + ol('<circle cx="60" cy="14" r="4"/>', shade(cc, -25), 1.2) + line('M60 16 L60 46', 1.4, shade(cc, -35));
   }
   if (a.has('beanie')) {
-    const bc = c ?? '#d9a23c';
+    const bc = c ?? '#b9975a';
     s += ol('<path d="M18 54 Q16 12 60 10 Q104 12 102 54 Z"/>', bc);
     s += ol('<path d="M15 44 Q60 34 105 44 L105 58 Q60 48 15 58 Z"/>', shade(bc, -18), 1.8);
     s += [24, 33, 42, 51, 60, 69, 78, 87, 96].map((x) => line(`M${x} ${43 - Math.abs(x - 60) * -0.06 - 2} L${x} ${54 - Math.abs(x - 60) * 0.05}`, 1, shade(bc, -45))).join('');
-    s += ol('<circle cx="40" cy="30" r="4.2"/>', '#efe3cf', 1.2) + ol('<circle cx="49" cy="25" r="3.4"/>', '#5f8a8b', 1.2);
+    s += ol('<circle cx="40" cy="30" r="4.2"/>', '#e1d7c7', 1.2) + ol('<circle cx="49" cy="25" r="3.4"/>', '#698384', 1.2);
   }
-  if (a.has('earring')) s += ol('<circle cx="21" cy="83" r="2.8"/><circle cx="99" cy="83" r="2.8"/>', '#d4a63a', 1);
-  if (a.has('hoops')) s += `<circle cx="21" cy="86" r="5" fill="none" stroke="${LINE}" stroke-width="4"/><circle cx="21" cy="86" r="5" fill="none" stroke="#d4a63a" stroke-width="2"/><circle cx="99" cy="86" r="5" fill="none" stroke="${LINE}" stroke-width="4"/><circle cx="99" cy="86" r="5" fill="none" stroke="#d4a63a" stroke-width="2"/>`;
+  if (a.has('earring')) s += ol('<circle cx="21" cy="83" r="2.8"/><circle cx="99" cy="83" r="2.8"/>', '#b59958', 1);
+  if (a.has('hoops')) s += `<circle cx="21" cy="86" r="5" fill="none" stroke="${LINE}" stroke-width="4"/><circle cx="21" cy="86" r="5" fill="none" stroke="#b59958" stroke-width="2"/><circle cx="99" cy="86" r="5" fill="none" stroke="${LINE}" stroke-width="4"/><circle cx="99" cy="86" r="5" fill="none" stroke="#b59958" stroke-width="2"/>`;
   return s;
 }
 
