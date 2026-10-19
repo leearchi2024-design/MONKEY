@@ -1,0 +1,16 @@
+{
+  "name": "zhuahou-game",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "抓猴大作戰：搜證解謎闖關手遊（可玩雛形）",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  }
+}
